@@ -1,0 +1,162 @@
+{
+  "info": {
+    "name": "Payment Gateway Simulator",
+    "description": "API collection for payment gateway testing",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "item": [
+        {
+          "name": "Health",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8000/health"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Merchants",
+      "item": [
+        {
+          "name": "Create Merchant",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": "http://localhost:8000/api/v1/merchants",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test Merchant\",\n  \"email\": \"test@merchant.com\",\n  \"webhook_url\": \"https://webhook.test.com\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Current Merchant",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer YOUR_API_KEY"}],
+            "url": "http://localhost:8000/api/v1/merchants/me"
+          }
+        },
+        {
+          "name": "Generate API Key",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer YOUR_API_KEY"}],
+            "url": "http://localhost:8000/api/v1/merchants/me/api-keys"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Create Payment (Success)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer YOUR_API_KEY"},
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "Idempotency-Key", "value": "{{$randomUUID}}"}
+            ],
+            "url": "http://localhost:8000/api/v1/payments",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 10000,\n  \"currency\": \"INR\",\n  \"description\": \"Order #123\",\n  \"customer_email\": \"customer@test.com\",\n  \"metadata\": {\n    \"order_id\": \"123\",\n    \"customer_id\": \"456\"\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Payment (Simulate Failure)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer YOUR_API_KEY"},
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "Idempotency-Key", "value": "{{$randomUUID}}"}
+            ],
+            "url": "http://localhost:8000/api/v1/payments",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 10000,\n  \"currency\": \"INR\",\n  \"description\": \"Order #123\",\n  \"simulate\": \"insufficient_funds\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Payment (Fraud)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer YOUR_API_KEY"},
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "Idempotency-Key", "value": "{{$randomUUID}}"}
+            ],
+            "url": "http://localhost:8000/api/v1/payments",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 10000,\n  \"currency\": \"INR\",\n  \"simulate\": \"fraud_detected\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Payment",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer YOUR_API_KEY"}],
+            "url": "http://localhost:8000/api/v1/payments/PAYMENT_ID"
+          }
+        },
+        {
+          "name": "Capture Payment",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer YOUR_API_KEY"}],
+            "url": "http://localhost:8000/api/v1/payments/PAYMENT_ID/capture"
+          }
+        },
+        {
+          "name": "Refund Payment (Partial)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer YOUR_API_KEY"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "url": "http://localhost:8000/api/v1/payments/PAYMENT_ID/refund",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 5000,\n  \"reason\": \"Customer requested\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Refund Payment (Full)",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer YOUR_API_KEY"}],
+            "url": "http://localhost:8000/api/v1/payments/PAYMENT_ID/refund",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Customer requested full refund\"\n}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "api_key",
+      "value": "YOUR_API_KEY",
+      "type": "string"
+    },
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    }
+  ]
+}
