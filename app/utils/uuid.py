@@ -1,0 +1,8 @@
+import uuid
+
+
+def generate_uuid() -> str:
+    """
+    Generates a UUID4 string.
+    """
+    return str(uuid.uuid4())
