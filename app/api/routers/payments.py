@@ -56,7 +56,7 @@ async def create_payment(
             description=request.description,
             customer_email=request.customer_email,
             customer_phone=request.customer_phone,
-            metadata=request.metadata,
+            custom_metadata=request.custom_metadata,
             idempotency_key=idempotency_key,
             simulate=request.simulate,
         )
