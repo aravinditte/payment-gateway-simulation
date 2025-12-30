@@ -88,7 +88,7 @@ class Payment(Base):
     description: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     customer_email: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
     customer_phone: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
-    metadata: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
+    custom_metadata: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
     error_code: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
     error_message: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(
