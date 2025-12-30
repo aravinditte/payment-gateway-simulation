@@ -5,6 +5,7 @@ A production-grade **Payment Gateway Simulator** built with **FastAPI**, **Postg
 
 This project is specifically built to showcase skills relevant for **backend / platform engineering roles**, including opportunities in **Japan-based tech companies**.
 
+📘 日本語版はこちら → [README_JP.md](README_JP.md)
 ---
 
 ## ✨ Key Features
