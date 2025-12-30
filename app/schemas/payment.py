@@ -14,7 +14,7 @@ class CreatePaymentRequest(BaseModel):
     description: Optional[str] = Field(None, description="Payment description")
     customer_email: Optional[str] = Field(None, description="Customer email")
     customer_phone: Optional[str] = Field(None, description="Customer phone")
-    metadata: Optional[dict] = Field(None, description="Custom metadata")
+    custom_metadata: Optional[dict] = Field(None, description="Custom metadata")
     simulate: Optional[str] = Field(
         None,
         description="Simulation type (success, insufficient_funds, network_timeout, fraud_detected, bank_error)",
@@ -29,7 +29,7 @@ class CreatePaymentRequest(BaseModel):
                 "currency": "INR",
                 "description": "Order #123",
                 "customer_email": "user@example.com",
-                "metadata": {"order_id": "123", "customer_id": "456"},
+                "custom_metadata": {"order_id": "123", "customer_id": "456"},
             }
         }
 
@@ -44,7 +44,7 @@ class PaymentResponse(BaseModel):
     description: Optional[str] = None
     customer_email: Optional[str] = None
     customer_phone: Optional[str] = None
-    metadata: Optional[dict] = None
+    custom_metadata: Optional[dict] = None
     error_code: Optional[str] = None
     error_message: Optional[str] = None
     created_at: datetime
