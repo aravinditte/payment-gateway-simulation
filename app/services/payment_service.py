@@ -37,7 +37,7 @@ class PaymentService:
         description: Optional[str] = None,
         customer_email: Optional[str] = None,
         customer_phone: Optional[str] = None,
-        metadata: Optional[dict] = None,
+        custom_metadata: Optional[dict] = None,
         idempotency_key: Optional[str] = None,
         simulate: Optional[str] = None,
     ) -> tuple[Payment, dict]:
@@ -50,7 +50,7 @@ class PaymentService:
             description: Payment description
             customer_email: Customer email
             customer_phone: Customer phone
-            metadata: Custom metadata
+            custom_metadata: Custom metadata
             idempotency_key: Idempotency key
             simulate: Simulation type
 
@@ -79,7 +79,7 @@ class PaymentService:
             description=description,
             customer_email=customer_email,
             customer_phone=customer_phone,
-            metadata=metadata or {},
+            custom_metadata=custom_metadata or {},
             status=PaymentStatus.CREATED,
         )
 
