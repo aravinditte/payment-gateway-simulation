@@ -556,7 +556,7 @@ MIT License - see [LICENSE](LICENSE) for details
 
 ## 📞 Support
 
-- 📧 Email: dev@aravind.dev
+- 📧 Email: aravinditte0121@gmail.com
 - 💬 GitHub Issues: [Issues](https://github.com/aravinditte/payment-gateway-simulation/issues)
 - 📖 Documentation: [Docs](https://github.com/aravinditte/payment-gateway-simulation)
 
